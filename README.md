@@ -20,6 +20,21 @@ Enterprise-grade IT Operations and Asset Management platform built with FastAPI 
 
 ## 🚀 Quick Start
 
+### Download and Install on Ubuntu
+
+**New to Faeflux One?** Start here: **[DOWNLOAD_AND_INSTALL.md](./DOWNLOAD_AND_INSTALL.md)**
+
+Quick commands:
+```bash
+# Clone the repository
+git clone https://github.com/ferhatyildiz-dvlp/Faeflux-One.git
+cd Faeflux-One
+
+# Run automated installation
+chmod +x install.sh
+./install.sh
+```
+
 ### Automated Installation (Recommended)
 
 Run the interactive installation script:

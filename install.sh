@@ -5,6 +5,12 @@
 
 set -e
 
+# Log file
+LOG_FILE="${HOME}/faeflux_install_$(date +%Y%m%d_%H%M%S).log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+echo "Installation log: $LOG_FILE"
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -148,7 +154,13 @@ fi
 # Install pnpm
 if ! command_exists pnpm; then
     echo -e "${BLUE}Installing pnpm...${NC}"
-    npm install -g pnpm
+    sudo npm install -g pnpm || {
+        echo -e "${YELLOW}⚠️  Failed to install pnpm with npm, trying alternative method...${NC}"
+        curl -fsSL https://get.pnpm.io/install.sh | sh - || {
+            echo -e "${YELLOW}⚠️  Using corepack as fallback...${NC}"
+            sudo corepack enable || sudo npm install -g pnpm
+        }
+    }
 fi
 
 echo -e "${GREEN}✓ System dependencies installed${NC}"
@@ -408,4 +420,6 @@ fi
 
 echo ""
 echo -e "${GREEN}🎉 All done! Happy coding!${NC}"
+echo ""
+echo -e "${BLUE}📄 Installation log saved to: $LOG_FILE${NC}"
 
