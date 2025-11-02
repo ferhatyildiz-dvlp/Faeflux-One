@@ -1,0 +1,89 @@
+{
+  "common": {
+    "appName": "Faeflux One",
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "actions": "Actions",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "auth": {
+    "title": "Login",
+    "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
+    "invalidCredentials": "Invalid email or password",
+    "loginSuccess": "Logged in successfully",
+    "loginError": "An error occurred while logging in"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "totalAssets": "Total Assets",
+    "totalTickets": "Total Tickets",
+    "activeAgents": "Active Agents",
+    "totalUsers": "Total Users"
+  },
+  "assets": {
+    "title": "Assets",
+    "list": "Asset List",
+    "create": "New Asset",
+    "edit": "Edit Asset",
+    "name": "Name",
+    "type": "Type",
+    "status": "Status",
+    "serialNumber": "Serial Number",
+    "model": "Model",
+    "manufacturer": "Manufacturer"
+  },
+  "tickets": {
+    "title": "Tickets",
+    "list": "Ticket List",
+    "create": "New Ticket",
+    "edit": "Edit Ticket",
+    "titleLabel": "Title",
+    "description": "Description",
+    "priority": "Priority",
+    "status": "Status"
+  },
+  "users": {
+    "title": "Users",
+    "list": "User List",
+    "create": "New User",
+    "edit": "Edit User",
+    "fullName": "Full Name",
+    "role": "Role",
+    "isActive": "Active"
+  },
+  "sites": {
+    "title": "Sites",
+    "list": "Site List",
+    "create": "New Site",
+    "edit": "Edit Site",
+    "name": "Name",
+    "address": "Address",
+    "city": "City"
+  },
+  "agents": {
+    "title": "Agents",
+    "list": "Agent List",
+    "hostname": "Hostname",
+    "osType": "Operating System",
+    "status": "Status",
+    "lastHeartbeat": "Last Heartbeat"
+  }
+}
+

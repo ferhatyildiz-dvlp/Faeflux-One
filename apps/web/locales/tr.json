@@ -1,0 +1,89 @@
+{
+  "common": {
+    "appName": "Faeflux One",
+    "welcome": "Hoş Geldiniz",
+    "login": "Giriş Yap",
+    "logout": "Çıkış Yap",
+    "email": "E-posta",
+    "password": "Şifre",
+    "submit": "Gönder",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "create": "Oluştur",
+    "search": "Ara",
+    "filter": "Filtrele",
+    "actions": "İşlemler",
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "confirm": "Onayla",
+    "close": "Kapat"
+  },
+  "auth": {
+    "title": "Giriş Yap",
+    "emailRequired": "E-posta gereklidir",
+    "passwordRequired": "Şifre gereklidir",
+    "invalidCredentials": "Geçersiz e-posta veya şifre",
+    "loginSuccess": "Başarıyla giriş yapıldı",
+    "loginError": "Giriş yapılırken bir hata oluştu"
+  },
+  "dashboard": {
+    "title": "Kontrol Paneli",
+    "overview": "Genel Bakış",
+    "totalAssets": "Toplam Varlık",
+    "totalTickets": "Toplam Talep",
+    "activeAgents": "Aktif Ajan",
+    "totalUsers": "Toplam Kullanıcı"
+  },
+  "assets": {
+    "title": "Varlıklar",
+    "list": "Varlık Listesi",
+    "create": "Yeni Varlık",
+    "edit": "Varlık Düzenle",
+    "name": "Ad",
+    "type": "Tür",
+    "status": "Durum",
+    "serialNumber": "Seri Numarası",
+    "model": "Model",
+    "manufacturer": "Üretici"
+  },
+  "tickets": {
+    "title": "Talepler",
+    "list": "Talep Listesi",
+    "create": "Yeni Talep",
+    "edit": "Talep Düzenle",
+    "titleLabel": "Başlık",
+    "description": "Açıklama",
+    "priority": "Öncelik",
+    "status": "Durum"
+  },
+  "users": {
+    "title": "Kullanıcılar",
+    "list": "Kullanıcı Listesi",
+    "create": "Yeni Kullanıcı",
+    "edit": "Kullanıcı Düzenle",
+    "fullName": "Ad Soyad",
+    "role": "Rol",
+    "isActive": "Aktif"
+  },
+  "sites": {
+    "title": "Lokasyonlar",
+    "list": "Lokasyon Listesi",
+    "create": "Yeni Lokasyon",
+    "edit": "Lokasyon Düzenle",
+    "name": "Ad",
+    "address": "Adres",
+    "city": "Şehir"
+  },
+  "agents": {
+    "title": "Ajanlar",
+    "list": "Ajan Listesi",
+    "hostname": "Ana Bilgisayar Adı",
+    "osType": "İşletim Sistemi",
+    "status": "Durum",
+    "lastHeartbeat": "Son Sinyal"
+  }
+}
+
