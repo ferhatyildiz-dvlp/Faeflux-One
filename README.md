@@ -20,7 +20,37 @@ Enterprise-grade IT Operations and Asset Management platform built with FastAPI 
 
 ## 🚀 Quick Start
 
-### 1. System Setup
+### Automated Installation (Recommended)
+
+Run the interactive installation script:
+
+```bash
+./install.sh
+```
+
+The script will:
+- ✅ Check prerequisites
+- ✅ Install all system dependencies
+- ✅ Setup PostgreSQL database
+- ✅ Configure Python backend
+- ✅ Setup Node.js frontend
+- ✅ Generate RSA keys for JWT
+- ✅ Create environment files
+- ✅ Run database migrations
+- ✅ Create admin user
+- ✅ Optionally setup systemd services and Nginx
+
+You'll be prompted for:
+- Database password
+- Admin email and password
+- Domain name (optional)
+- Production setup preferences
+
+### Manual Installation
+
+If you prefer manual setup, follow these steps:
+
+#### 1. System Setup
 
 ```bash
 # Update system
@@ -92,6 +122,15 @@ cp .env.example .env.local
 
 ### 5. Development Mode
 
+#### Option A: Quick Start Script (Recommended)
+```bash
+./dev-start.sh
+```
+
+This starts both backend and frontend servers automatically.
+
+#### Option B: Manual Start
+
 **Terminal 1 - Backend:**
 ```bash
 cd apps/api
@@ -105,7 +144,7 @@ cd apps/web
 pnpm dev
 ```
 
-Access:
+**Access Points:**
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:8000
 - API Docs: http://localhost:8000/docs
