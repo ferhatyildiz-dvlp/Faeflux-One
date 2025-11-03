@@ -167,16 +167,22 @@ sudo apt-get update -qq
 
 # Install Python and related packages
 echo -e "${BLUE}Installing Python dependencies...${NC}"
-sudo apt-get install -y \
+if sudo apt-get install -y \
     python3.12 python3.12-venv python3-pip \
     postgresql-16 postgresql-contrib \
     nginx certbot python3-certbot-nginx \
     curl git build-essential \
-    || sudo apt-get install -y \
-    python3 python3-venv python3-pip \
-    postgresql postgresql-contrib \
-    nginx certbot python3-certbot-nginx \
-    curl git build-essential
+    libpq-dev 2>/dev/null; then
+    echo -e "${GREEN}✓ Python 3.12 and dependencies installed${NC}"
+else
+    echo -e "${YELLOW}⚠️  Python 3.12 not available, trying Python 3...${NC}"
+    sudo apt-get install -y \
+        python3 python3-venv python3-pip \
+        postgresql postgresql-contrib \
+        nginx certbot python3-certbot-nginx \
+        curl git build-essential \
+        libpq-dev
+fi
 
 # Install Node.js if not present
 if ! command_exists node; then
@@ -188,13 +194,29 @@ fi
 # Install pnpm
 if ! command_exists pnpm; then
     echo -e "${BLUE}Installing pnpm...${NC}"
-    sudo npm install -g pnpm || {
-        echo -e "${YELLOW}⚠️  Failed to install pnpm with npm, trying alternative method...${NC}"
-        curl -fsSL https://get.pnpm.io/install.sh | sh - || {
-            echo -e "${YELLOW}⚠️  Using corepack as fallback...${NC}"
-            sudo corepack enable || sudo npm install -g pnpm
+    # Try corepack first (recommended for Node.js 20+)
+    if command_exists corepack; then
+        sudo corepack enable 2>/dev/null || true
+        corepack prepare pnpm@latest --activate 2>/dev/null || {
+            echo -e "${BLUE}Trying npm install method...${NC}"
+            sudo npm install -g pnpm
         }
-    }
+    else
+        # Fallback to npm install
+        sudo npm install -g pnpm || {
+            echo -e "${YELLOW}⚠️  Failed to install pnpm with npm, trying pnpm installer...${NC}"
+            curl -fsSL https://get.pnpm.io/install.sh | sh -
+            export PNPM_HOME="$HOME/.local/share/pnpm"
+            export PATH="$PNPM_HOME:$PATH"
+        }
+    fi
+    # Verify pnpm installation
+    if ! command_exists pnpm; then
+        echo -e "${RED}❌ Failed to install pnpm. Please install manually.${NC}"
+        echo -e "${YELLOW}   Run: sudo npm install -g pnpm${NC}"
+        exit 1
+    fi
+    echo -e "${GREEN}✓ pnpm installed: $(pnpm --version)${NC}"
 fi
 
 echo -e "${GREEN}✓ System dependencies installed${NC}"
