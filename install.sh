@@ -168,20 +168,24 @@ sudo apt-get update -qq
 # Install Python and related packages
 echo -e "${BLUE}Installing Python dependencies...${NC}"
 if sudo apt-get install -y \
-    python3.12 python3.12-venv python3-pip \
-    postgresql-16 postgresql-contrib \
+    python3.12 python3.12-venv python3.12-dev python3-pip \
+    postgresql-16 postgresql-contrib postgresql-server-dev-16 \
     nginx certbot python3-certbot-nginx \
     curl git build-essential \
-    libpq-dev 2>/dev/null; then
+    libpq-dev libssl-dev libffi-dev \
+    pkg-config python3-setuptools python3-wheel \
+    openssl 2>/dev/null; then
     echo -e "${GREEN}✓ Python 3.12 and dependencies installed${NC}"
 else
     echo -e "${YELLOW}⚠️  Python 3.12 not available, trying Python 3...${NC}"
     sudo apt-get install -y \
-        python3 python3-venv python3-pip \
-        postgresql postgresql-contrib \
+        python3 python3-venv python3-dev python3-pip \
+        postgresql postgresql-contrib postgresql-server-dev-all \
         nginx certbot python3-certbot-nginx \
         curl git build-essential \
-        libpq-dev
+        libpq-dev libssl-dev libffi-dev \
+        pkg-config python3-setuptools python3-wheel \
+        openssl
 fi
 
 # Install Node.js if not present
@@ -273,13 +277,20 @@ fi
 # Activate and upgrade pip
 if [ "$RUN_AS_ROOT" = true ]; then
     echo -e "${BLUE}Installing Python packages...${NC}"
-    sudo -u "$REGULAR_USER" bash -c "cd '$INSTALL_DIR/apps/api' && source venv/bin/activate && pip install --upgrade pip -q"
-    sudo -u "$REGULAR_USER" bash -c "cd '$INSTALL_DIR/apps/api' && source venv/bin/activate && pip install -r requirements.txt -q"
+    sudo -u "$REGULAR_USER" bash -c "cd '$INSTALL_DIR/apps/api' && source venv/bin/activate && pip install --upgrade pip setuptools wheel -q"
+    echo -e "${BLUE}Installing dependencies (this may take a few minutes)...${NC}"
+    sudo -u "$REGULAR_USER" bash -c "cd '$INSTALL_DIR/apps/api' && source venv/bin/activate && pip install -r requirements.txt" || {
+        echo -e "${YELLOW}⚠️  Some packages failed to install, trying with --no-cache-dir...${NC}"
+        sudo -u "$REGULAR_USER" bash -c "cd '$INSTALL_DIR/apps/api' && source venv/bin/activate && pip install --no-cache-dir -r requirements.txt"
+    }
 else
     source venv/bin/activate
-    pip install --upgrade pip -q
-    echo -e "${BLUE}Installing Python packages...${NC}"
-    pip install -r requirements.txt -q
+    pip install --upgrade pip setuptools wheel -q
+    echo -e "${BLUE}Installing Python packages (this may take a few minutes)...${NC}"
+    pip install -r requirements.txt || {
+        echo -e "${YELLOW}⚠️  Some packages failed to install, trying with --no-cache-dir...${NC}"
+        pip install --no-cache-dir -r requirements.txt
+    }
     deactivate
 fi
 
