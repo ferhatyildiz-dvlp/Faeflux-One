@@ -65,8 +65,8 @@ services:
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
     volumes:
       - ./apps/web:/app
-      - /app/node_modules
-      - /app/.next
+      - web_node_modules:/app/node_modules
+      - web_next:/app/.next
     ports:
       - "3000:3000"
     depends_on:
@@ -77,6 +77,8 @@ services:
 
 volumes:
   postgres_data:
+  web_node_modules:
+  web_next:
 
 networks:
   faeflux-network:
