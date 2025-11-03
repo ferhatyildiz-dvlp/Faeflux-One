@@ -50,3 +50,4 @@ class AuditLogResponse(SQLModel):
     user_agent: Optional[str] = None
     created_at: datetime
 
+

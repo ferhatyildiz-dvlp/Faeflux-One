@@ -238,3 +238,4 @@ For issues or questions:
 2. Review logs: `journalctl -u faeflux-api -u faeflux-web`
 3. Check GitHub issues: [https://github.com/ferhatyildiz-dvlp/Faeflux-One](https://github.com/ferhatyildiz-dvlp/Faeflux-One)
 
+

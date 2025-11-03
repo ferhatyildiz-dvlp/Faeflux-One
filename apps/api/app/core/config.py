@@ -61,3 +61,4 @@ if not PRIVATE_KEY_PATH.exists() or not PUBLIC_KEY_PATH.exists():
         "openssl rsa -in private.pem -pubout -out public.pem"
     )
 
+

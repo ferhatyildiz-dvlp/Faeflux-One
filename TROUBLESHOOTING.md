@@ -192,3 +192,4 @@ ls -lt ~/faeflux_install_*.log | head -1 | xargs cat
 4. Review error messages carefully
 5. Check GitHub issues: https://github.com/ferhatyildiz-dvlp/Faeflux-One/issues
 
+

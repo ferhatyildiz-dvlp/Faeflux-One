@@ -293,8 +293,20 @@ echo -e "${GREEN}⚙️  Step 7/10: Configuring environment files...${NC}"
 # Create .env file for backend
 if [ ! -f ".env" ]; then
     echo -e "${BLUE}Creating backend .env file...${NC}"
+    # Build CORS_ORIGINS and ALLOWED_HOSTS as JSON arrays
+    if [ "$DOMAIN" = "localhost" ] || [ -z "$DOMAIN" ]; then
+        CORS_ORIGINS_JSON='["http://localhost:3000"]'
+        ALLOWED_HOSTS_JSON='["localhost"]'
+    else
+        CORS_ORIGINS_JSON="[\"http://localhost:3000\",\"https://$DOMAIN\"]"
+        ALLOWED_HOSTS_JSON="[\"localhost\",\"$DOMAIN\"]"
+    fi
+    
+    # Generate secret key
+    SECRET_KEY_VALUE=$(openssl rand -hex 32)
+    
     if [ "$RUN_AS_ROOT" = true ]; then
-        sudo -u "$REGULAR_USER" bash -c "cat > .env <<'EOF'
+        sudo -u "$REGULAR_USER" bash -c "cat > .env <<EOF
 # Application
 APP_NAME=Faeflux One
 DEBUG=false
@@ -305,21 +317,21 @@ DATABASE_URL=postgresql://$DB_USER:$DB_PASSWORD@localhost:5432/$DB_NAME
 DATABASE_ECHO=false
 
 # Security
-SECRET_KEY=$(openssl rand -hex 32)
+SECRET_KEY=$SECRET_KEY_VALUE
 JWT_ALGORITHM=RS256
 JWT_PRIVATE_KEY_PATH=./private.pem
 JWT_PUBLIC_KEY_PATH=./public.pem
 JWT_ACCESS_TOKEN_EXPIRE_MINUTES=15
 JWT_REFRESH_TOKEN_EXPIRE_DAYS=14
 
-# CORS
-CORS_ORIGINS=http://localhost:3000,https://$DOMAIN
+# CORS (JSON array format for Pydantic List)
+CORS_ORIGINS=$CORS_ORIGINS_JSON
 
 # Rate Limiting
 RATE_LIMIT_PER_MINUTE=60
 
-# Allowed Hosts
-ALLOWED_HOSTS=localhost,$DOMAIN
+# Allowed Hosts (JSON array format for Pydantic List)
+ALLOWED_HOSTS=$ALLOWED_HOSTS_JSON
 
 # File Upload
 MAX_UPLOAD_SIZE=10485760
@@ -338,21 +350,21 @@ DATABASE_URL=postgresql://$DB_USER:$DB_PASSWORD@localhost:5432/$DB_NAME
 DATABASE_ECHO=false
 
 # Security
-SECRET_KEY=$(openssl rand -hex 32)
+SECRET_KEY=$SECRET_KEY_VALUE
 JWT_ALGORITHM=RS256
 JWT_PRIVATE_KEY_PATH=./private.pem
 JWT_PUBLIC_KEY_PATH=./public.pem
 JWT_ACCESS_TOKEN_EXPIRE_MINUTES=15
 JWT_REFRESH_TOKEN_EXPIRE_DAYS=14
 
-# CORS
-CORS_ORIGINS=http://localhost:3000,https://$DOMAIN
+# CORS (JSON array format for Pydantic List)
+CORS_ORIGINS=$CORS_ORIGINS_JSON
 
 # Rate Limiting
 RATE_LIMIT_PER_MINUTE=60
 
-# Allowed Hosts
-ALLOWED_HOSTS=localhost,$DOMAIN
+# Allowed Hosts (JSON array format for Pydantic List)
+ALLOWED_HOSTS=$ALLOWED_HOSTS_JSON
 
 # File Upload
 MAX_UPLOAD_SIZE=10485760

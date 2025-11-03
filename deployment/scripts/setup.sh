@@ -70,3 +70,4 @@ echo "8. Install systemd services"
 echo "9. Configure Nginx with domain: $DOMAIN"
 echo "10. Setup SSL with Certbot"
 
+

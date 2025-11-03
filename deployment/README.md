@@ -41,3 +41,4 @@ Edit the service files and Nginx config to match your environment:
 - Update domain in Nginx config
 - Update database credentials in .env files
 
+

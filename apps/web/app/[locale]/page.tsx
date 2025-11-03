@@ -4,3 +4,4 @@ export default function HomePage() {
   redirect('/tr/dashboard');
 }
 
+

@@ -101,3 +101,4 @@ def verify_token(token: str, token_type: str = "access") -> Optional[Dict]:
         logger.warning("JWT verification failed", error=str(e))
         return None
 
+

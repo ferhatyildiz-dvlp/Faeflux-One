@@ -84,3 +84,4 @@ class AgentInventory(SQLModel):
     hostname: str
     inventory: Dict
 
+
