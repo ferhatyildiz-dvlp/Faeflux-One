@@ -3,10 +3,12 @@ Site Model
 """
 
 from datetime import datetime
-from typing import Optional, List
+from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
-from app.models.user import User
-from app.models.asset import Asset
+
+if TYPE_CHECKING:
+    from app.models.user import User
+    from app.models.asset import Asset
 
 
 class SiteBase(SQLModel):

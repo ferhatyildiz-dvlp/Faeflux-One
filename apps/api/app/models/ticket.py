@@ -51,7 +51,7 @@ class Ticket(TicketBase, table=True):
     
     # Relationships
     asset: Optional["Asset"] = Relationship(back_populates="tickets")
-    created_by_user: User = Relationship(
+    created_by_user: "User" = Relationship(
         back_populates="created_tickets",
         sa_relationship_kwargs={"foreign_keys": "[Ticket.created_by_id]"}
     )
